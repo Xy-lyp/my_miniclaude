@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "miniclaude"
+version = "0.1.0"
+description = "mini — CLI + Daemon IPC via TCP NDJSON + JSON-RPC 2.0"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.8",
+]
+
+[project.optional-dependencies]
+tui = [
+    "textual>=0.40",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
+
+[project.scripts]
+mini = "mini_cli.main:main"
+mini-core = "mini_core.daemon:main"
+mini-tui = "mini_tui.app:main"
+
+[tool.setuptools.packages.find]
+include = ["mini_cli*", "mini_core*", "mini_tui*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
